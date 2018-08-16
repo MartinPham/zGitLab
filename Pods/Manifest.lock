@@ -1,0 +1,18 @@
+PODS:
+  - Alamofire (3.5.0)
+  - AwesomeCache (3.0.1)
+  - PKHUD (3.2.1)
+
+DEPENDENCIES:
+  - Alamofire
+  - AwesomeCache
+  - PKHUD
+
+SPEC CHECKSUMS:
+  Alamofire: b70a7352335f8ea5babd0a923eb7e8eacc67b877
+  AwesomeCache: a1561c926b6cf812c5f3f4262ea22e20bf8323c1
+  PKHUD: 001c11518f125a273ddf026bcc64918423744ea2
+
+PODFILE CHECKSUM: 688fd037f7b8704dc038f00a6c5b44c42820d6b2
+
+COCOAPODS: 1.0.1

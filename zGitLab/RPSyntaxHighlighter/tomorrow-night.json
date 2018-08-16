@@ -1,0 +1,30 @@
+{
+  "default" : {
+    "color" : "CDD1CF",
+    "background" : "000000",
+    "font" : "Courier",
+    "fontSize" : 14.0
+  },
+  "keyword" : {
+    "color" : "B193BA"
+  },
+  "constant" : {
+    "color" : "DD935E"
+  },
+  "string" : {
+    "color" : "B5BC67"
+  },
+  "function" : {
+    "color" : "80A1BD"
+  },
+  "method" : {
+    "color" : "80A1BD"
+  },
+  "operator" : {
+    "color" : "89BDB6"
+  },
+  "comment" : {
+    "color" : "959795",
+    "italic" : true
+  }
+}

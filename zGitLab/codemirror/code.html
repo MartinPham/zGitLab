@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+	<title>CodeMirror</title>
+	<meta charset="utf-8"/>
+	<link rel=stylesheet href="./lib/codemirror.css">
+	<script src="./lib/codemirror.js"></script>
+
+	<link rel="stylesheet" href="./theme/vibrant-ink.css">
+
+	<link rel="stylesheet" href="./addon/hint/show-hint.css">
+	<link rel="stylesheet" href="./addon/dialog/dialog.css">
+	<link rel="stylesheet" href="./addon/search/matchesonscrollbar.css">
+
+	<script src="./addon/dialog/dialog.js"></script>
+	<script src="./addon/search/searchcursor.js"></script>
+	<script src="./addon/search/search.js"></script>
+	<script src="./addon/scroll/annotatescrollbar.js"></script>
+	<script src="./addon/search/matchesonscrollbar.js"></script>
+	<script src="./addon/search/jump-to-line.js"></script>
+
+	<script src="./addon/hint/show-hint.js"></script>
+	<script src="./addon/hint/anyword-hint.js"></script>
+	<script src="./addon/hint/javascript-hint.js"></script>
+	<script src="./addon/hint/css-hint.js"></script>
+	<script src="./addon/hint/html-hint.js"></script>
+	<script src="./addon/hint/xml-hint.js"></script>
+	<script src="./addon/hint/sql-hint.js"></script>
+
+
+	<script src="./addon/selection/active-line.js"></script>
+	<script src="./addon/edit/matchbrackets.js"></script>
+	<script src="./mode/htmlmixed/htmlmixed.js"></script>
+	<script src="./mode/xml/xml.js"></script>
+	<script src="./mode/javascript/javascript.js"></script>
+	<script src="./mode/css/css.js"></script>
+	<script src="./mode/clike/clike.js"></script>
+	<script src="./mode/php/php.js"></script>
+	<script src="./addon/fold/xml-fold.js"></script>
+	<script src="./addon/edit/matchtags.js"></script>
+	<script src="./mode/xml/xml.js"></script>
+
+ 
+
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			background: #000;
+		}
+		.CodeMirror {
+			font-size: 15px;
+			width: 100%;
+			height: 100%;
+			display: block;
+		}
+	</style>
+
+	<form style="position: relative; margin-top: .5em;">
+		<textarea id="code"></textarea>
+	</form>
+	<script>
+	var editor;
+	function initCode(filename, code)
+	{
+		// Create Base64 Object
+	// var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9+/=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/rn/g,"n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}}
+
+
+		// document.getElementById("code").value = Base64.decode(code);
+		
+
+		var mode = "application/x-httpd-php";
+
+		var ext = filename.split('.').pop().toLowerCase();
+
+		if(ext == 'html' || ext == 'htm')
+		{
+			mode = 'text/html';
+		}else if(ext == 'css')
+		{
+			mode = 'text/css';
+		}else if(ext == 'js' || ext == 'json')
+		{
+			mode = 'text/javascript';
+		} else if(ext == 'xml')
+		{
+			mode = 'text/xml';
+		} else if(ext == 'jpg' || ext == 'jpeg' || ext == 'ico' || ext == 'png' || ext == 'gif' || ext == 'bmp')
+		{
+			document.write('<img src="data:image/png;base64,' + code + '"/>')
+		} else if(ext == 'ttf' || ext == 'eot' || ext == 'woff' || ext == 'woff2' )
+		{
+			document.write('')
+		} 
+
+		document.getElementById("code").value = atob(code);
+
+		editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+			lineNumbers: true,
+	        matchBrackets: true,
+	        mode: mode,
+	        indentUnit: 4,
+	        indentWithTabs: true,
+	        theme: 'vibrant-ink',
+	        lineWrapping: true,
+	  	// mode: "text/html",
+	    	matchTags: {bothTags: true},
+	    	styleActiveLine: true,
+	    	// extraKeys: {"Alt-F": "findPersistent"}
+		});
+
+		editor.on("keyup", function (cm, event) {
+	        // window.location = "code:changed?code=" + Base64.encode(document.getElementById("code").value);
+	        window.location = "code:changed?" + btoa(editor.getValue());
+	    });
+
+	    editor.on("inputRead",function(cm,changeObj){
+	   		CodeMirror.commands.autocomplete(cm, null, {completeSingle: true});
+		});
+	}
+
+	window.onload = function()
+	{
+		window.location = "code:loaded";
+	}
+
+	</script>
+</html>

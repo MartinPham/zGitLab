@@ -1,0 +1,6 @@
+framework module Pods_zGitLabTests {
+  umbrella header "Pods-zGitLabTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
